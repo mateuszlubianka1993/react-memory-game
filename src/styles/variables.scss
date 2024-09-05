@@ -1,0 +1,50 @@
+:root {
+// SPACING
+    --space: 4px;
+    --space-x2: calc(var(--space) * 2);
+    --space-x3: calc(var(--space) * 3);
+    --space-x3: calc(var(--space) * 4);
+    --space-x4: calc(var(--space) * 5);
+    --space-x5: calc(var(--space) * 6);
+    --space-x6: calc(var(--space) * 7);
+    --space-x7: calc(var(--space) * 8);
+    --space-x144: calc(var(--space) * 144);
+    --space-x320: calc(var(--space) * 320);
+
+// BREAKPOINTS
+    --breakpoint-sm: var(--space-x144);
+    --breakpoint-md: calc(var(--space) * 192);
+    --breakpoint-lg: calc(var(--space) * 248);
+    --breakpoint-xl: calc(var(--space) * 300);
+
+// COLORS
+// PALETTE 1
+    --color-pink1: #FF99C8;
+    --color-yellow1: #FCF6BD;
+    --color-green1: #D0F4DE;
+    --color-blue1: #A9DEF9;
+    --color-purple1: #E4C1F9;
+// PALETTE 2
+    --federal-blue: #03045eff;
+    --marian-blue: #023e8aff;
+    --honolulu-blue: #0077b6ff;
+    --blue-green: #0096c7ff;
+    --pacific-cyan: #00b4d8ff;
+    --vivid-sky-blue: #48cae4ff;
+    --non-photo-blue: #90e0efff;
+    --non-photo-blue-2: #ade8f4ff;
+    --light-cyan: #caf0f8ff;
+
+    .theme-light {
+        --background-color: var(--light-cyan);
+        --color-primary: var(--honolulu-blue);
+        --color-secondary: var(--blue-green);
+        --color-tertiary: var(--federal-blue);
+        --color-quaternary: var(--light-cyan);
+    }
+
+    .theme-dark {
+        --color-primary: #fff;
+        --color-secondary: #000;
+    }
+}
