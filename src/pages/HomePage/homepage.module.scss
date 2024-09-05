@@ -1,0 +1,17 @@
+@import "../../styles/_mixins";
+
+.root {
+    &__navBox {
+        margin: 0 auto;
+
+        @include tablet-up {
+            max-width: 60%;
+            border: 2px solid var(--color-primary);
+            border-radius: var(--space);
+        }
+
+        @include desktop-xl {
+            max-width: 30%;
+        }
+    }
+}
