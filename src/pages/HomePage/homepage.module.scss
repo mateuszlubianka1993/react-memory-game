@@ -3,6 +3,7 @@
 .root {
     &__navBox {
         margin: 0 auto;
+        margin-top: var(--space-x3);
 
         @include tablet-up {
             max-width: 60%;

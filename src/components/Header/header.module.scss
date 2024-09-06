@@ -1,0 +1,35 @@
+@import "../../styles/_mixins";
+
+.root {
+    text-align: center;
+    padding: var(--space-x4) var(--space-x2);
+    background-color: var(--color-primary);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: var(--space-x3);
+
+    @include tablet-up {
+        padding: var(--space-x8) var(--space-x3);
+        gap: var(--space-x4);
+    }
+
+    &__log {
+        font-size: var(--space-x9);
+        display: flex;
+        color: var(--color-quaternary);
+
+        @include tablet-up {
+            font-size: var(--space-x12);
+        }
+    }
+
+    &__title {
+        font-size: var(--space-x9);
+        color: var(--color-quaternary);
+
+        @include tablet-up {
+            font-size: var(--space-x12);
+        }
+    }
+}
