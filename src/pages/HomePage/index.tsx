@@ -1,6 +1,5 @@
 import type { FC } from "react";
-import Navigation from "../../components/Navigation/Navigation";
-import Header from "../../components/Header/Header";
+import { Navigation, Header } from "../../components";
 import { HOMEPAGE_ROUTES } from "../../config/router";
 import styles from "./homepage.module.scss";
 
