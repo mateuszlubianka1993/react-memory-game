@@ -28,10 +28,10 @@ const GameCard: FC<GameCardProps> = ({
     let icon = <GiBlackFlag />;
     const label = getLabel(mode);
 
-    const handleClick = () => {
+    const handleClick = (id: string) => {
         if (disabled) return;
 
-        onClick();
+        onClick(id);
 
         if (blockClickOpen) return;
         setIsFlipped(true);
@@ -40,7 +40,7 @@ const GameCard: FC<GameCardProps> = ({
     return (
         <div
             className={styles.root}
-            onClick={handleClick}
+            onClick={() => handleClick(card.id)}
         > 
             <div className={`${styles.root__inner} ${isFlipped ? styles.root__inner__flipped : ''}`}>
                 <div className={styles.root__front}>

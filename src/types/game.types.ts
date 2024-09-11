@@ -19,7 +19,7 @@ export interface DeckItem {
 
 export interface GameCardProps {
     card: DeckItem;
-    onClick: () => void;
+    onClick: (id: string) => void;
     mode?: GameCardMode;
     isOpen: boolean;
     blockClickOpen?: boolean;

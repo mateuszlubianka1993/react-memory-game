@@ -1,8 +1,8 @@
-import { FC, useState, useEffect } from "react";
+import { FC, useState, useEffect, useCallback } from "react";
 import { GameCard } from "../../components";
 import { createDeck } from "../../helpers/createDeck";
 import { DeckItem, GameBoardProps, GameCardMode } from '../../types';
-import { ROUND_TIME } from "../../config/game";
+import { ROUND_TIME, BLOCK_TIME } from "../../config/game";
 import styles from "./gameBoard.module.scss";
 
 const GameBoard: FC<GameBoardProps> = ({userName}) => {
@@ -11,9 +11,9 @@ const GameBoard: FC<GameBoardProps> = ({userName}) => {
     const [cards, setCards] = useState<DeckItem[]>([]);
     const [disabled, setDisabled] = useState(false);
     const endGame = foundPairs.length === cards.length / 2;
-    const handleCardClick = (id: string) => {
+    const handleCardClick = useCallback((id: string) => {
         setOpenPairs(prevState => [...prevState, id]);
-    };
+    }, []);
     const isCardOpen = (id: string) => {
         const found = openPairs.find(openId => openId === id) || foundPairs.find(foundId =>  id.includes(foundId));
 
@@ -28,8 +28,10 @@ const GameBoard: FC<GameBoardProps> = ({userName}) => {
 
             if (firstPairId === secondPairId) {
                 setFoundPairs(precState => [...precState, firstPairId]);
-                setOpenPairs([]);
-                setDisabled(false);
+                setTimeout(() => {
+                    setOpenPairs([]);
+                    setDisabled(false);
+                }, BLOCK_TIME);
             } else {
                 setTimeout(() => {
                     setOpenPairs([]);
@@ -64,11 +66,11 @@ const GameBoard: FC<GameBoardProps> = ({userName}) => {
         <div className={styles.root}>
             <h2 className={styles.root__title}>Hello {userName}!</h2>
             <div className={styles.root__boardContainer}>
-                {cards.map((card, index) => (
+                {cards.map((card) => (
                     <GameCard
-                        key={`${card.pairId}-${index}`}
+                        key={card.id}
                         card={card}
-                        onClick={() => handleCardClick(card.id)}
+                        onClick={handleCardClick}
                         blockClickOpen={true}
                         disabled={disabled}
                         isOpen={isCardOpen(card.id)}
