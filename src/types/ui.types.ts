@@ -13,4 +13,13 @@ export interface ButtonProps {
     onClick: () => void;
     disabled?: boolean;
     children: ReactNode;
+    fluid?: boolean;
+}
+
+export interface ModalProps {
+    children: ReactNode;
+    ref: any;
+    openModal?: () => void;
+    closeModal?: () => void;
+    onModalClose?: () => void;
 }
