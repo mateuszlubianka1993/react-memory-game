@@ -28,4 +28,8 @@
         color: var(--color-quinary);
         border-color: var(--color-quaternary);
     }
+
+    &__fluid {
+        width: 100%;
+    }
 }

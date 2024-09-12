@@ -25,3 +25,11 @@ export interface GameCardProps {
     blockClickOpen?: boolean;
     disabled?: boolean;
 }
+
+export interface EndGameProps {
+    score?: number;
+    name: string;
+    isOpen: boolean;
+    onModalClose?: () => void;
+    restartGame: () => void;
+}

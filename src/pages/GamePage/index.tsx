@@ -6,6 +6,7 @@ import {
     GameBoard,
     Button,
 } from "../../components";
+import { ROUTER_PATHS } from "../../config/router";
 
 const GamePage: FC = () => {
     const [userName, setUserName] = useState<string>('');
@@ -16,7 +17,7 @@ const GamePage: FC = () => {
     };
 
     const handleQuitGame = () => {
-        navigate("/");
+        navigate(ROUTER_PATHS.HOME);
     };
 
     return (
