@@ -1,0 +1,12 @@
+.root {
+    border: 2px solid var(--color-primary);
+    padding: var(--space-x3);
+    margin-top: var(--space-x3);
+
+    &__title {
+        font-size: var(--space-x6);
+        color: var(--color-quinary);
+        font-weight: 700;
+        text-align: center;
+    }
+}

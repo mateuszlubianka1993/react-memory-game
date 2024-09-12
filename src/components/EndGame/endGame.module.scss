@@ -1,0 +1,20 @@
+.root {
+    padding: var(--space-x2);
+    background-color: var(--color-quaternary);
+    color: var(--color-quinary);
+
+    &__title {
+        margin-bottom: var(--space);
+        font-size: var(--space-x5);
+        font-weight: 700;
+    }
+
+    &__text {
+        font-size: var(--space-x4);
+        margin-bottom: var(--space);
+    }
+
+    &__actions {
+        margin-top: var(--space-x5);
+    }
+}

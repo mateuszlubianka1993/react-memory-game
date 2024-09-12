@@ -3,11 +3,21 @@
     --space: 4px;
     --space-x2: calc(var(--space) * 2);
     --space-x3: calc(var(--space) * 3);
-    --space-x3: calc(var(--space) * 4);
-    --space-x4: calc(var(--space) * 5);
-    --space-x5: calc(var(--space) * 6);
-    --space-x6: calc(var(--space) * 7);
-    --space-x7: calc(var(--space) * 8);
+    --space-x4: calc(var(--space) * 4);
+    --space-x5: calc(var(--space) * 5);
+    --space-x6: calc(var(--space) * 6);
+    --space-x7: calc(var(--space) * 7);
+    --space-x8: calc(var(--space) * 8);
+    --space-x9: calc(var(--space) * 9);
+    --space-x10: calc(var(--space) * 10);
+    --space-x11: calc(var(--space) * 11);
+    --space-x12: calc(var(--space) * 12);
+    --space-x30: calc(var(--space) * 30);
+    --space-x31: calc(var(--space) * 31);
+    --space-x40: calc(var(--space) * 40);
+    --space-x50: calc(var(--space) * 50);
+    --space-x51: calc(var(--space) * 51);
+    --space-x108: calc(var(--space) * 108);
     --space-x144: calc(var(--space) * 144);
     --space-x320: calc(var(--space) * 320);
 
@@ -18,13 +28,15 @@
     --breakpoint-xl: calc(var(--space) * 300);
 
 // COLORS
-// PALETTE 1
+    --color-black: #000;
+    --color-white: #fff;
+    // PALETTE 1
     --color-pink1: #FF99C8;
     --color-yellow1: #FCF6BD;
     --color-green1: #D0F4DE;
     --color-blue1: #A9DEF9;
     --color-purple1: #E4C1F9;
-// PALETTE 2
+    // PALETTE 2
     --federal-blue: #03045eff;
     --marian-blue: #023e8aff;
     --honolulu-blue: #0077b6ff;
@@ -41,6 +53,11 @@
         --color-secondary: var(--blue-green);
         --color-tertiary: var(--federal-blue);
         --color-quaternary: var(--light-cyan);
+        --color-quinary: var(--marian-blue);
+        --color-senary: var(--non-photo-blue);
+
+        --color-error: var(--color-pink1);
+        --backdrop-color: rgba(0, 0, 0, .7);
     }
 
     .theme-dark {

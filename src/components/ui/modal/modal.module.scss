@@ -1,0 +1,30 @@
+@import "../../../styles/mixins";
+
+.modal {
+    max-width: unset;
+    padding: var(--space-x2);
+    padding: 0;
+    border-radius: var(--space-x2);
+    border: 2px solid var(--color-primary);
+    overflow: hidden;
+    width: 85%;
+
+    @include tablet-up {
+        width: 65%;
+    }
+
+    &__header {
+        background-color: var(--color-primary);
+        color: var(--color-quaternary);
+        font-weight: 700;
+        padding: var(--space-x2);
+    }
+
+    &__closeButton {
+        padding: var(--space-x2) 0;
+    }
+
+    &::backdrop {
+        background-color: var(--backdrop-color);
+    }
+}
