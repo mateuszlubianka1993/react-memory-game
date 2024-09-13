@@ -3,7 +3,7 @@ import { Modal, Button } from "../../components";
 import { ModalProps, EndGameProps } from '../../types';
 import styles from "./endGame.module.scss";
 
-const EndGame: FC<EndGameProps> = memo(({ isOpen, score, name, restartGame, onModalClose }) => {
+const EndGame: FC<EndGameProps> = memo(({ isOpen, moves, name, restartGame, onModalClose }) => {
     const modalRef = useRef<ModalProps>();
     const openModal = () => {
         if (!modalRef?.current?.openModal) return;
@@ -31,7 +31,7 @@ const EndGame: FC<EndGameProps> = memo(({ isOpen, score, name, restartGame, onMo
             <div className={styles.root}>
                 <h2 className={styles.root__title}>Congratulations {name}!</h2>
                 <p className={styles.root__text}>You found all the pairs.</p>
-                <p className={styles.root__text}>You score: {score}</p>
+                <p className={styles.root__text}>Your moves: {moves}</p>
                 <div className={styles.root__actions}>
                     <Button onClick={handleRestartGame} fluid>Restart Game</Button>
                 </div>

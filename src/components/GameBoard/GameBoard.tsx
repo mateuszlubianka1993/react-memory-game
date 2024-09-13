@@ -11,6 +11,7 @@ const GameBoard: FC<GameBoardProps> = ({userName}) => {
     const [cards, setCards] = useState<DeckItem[]>([]);
     const [disabled, setDisabled] = useState(false);
     const [showEndGame, setShowEndGame] = useState(false);
+    const [gameHistory, setGameHistory] = useState<any>([]);
     const endGame = foundPairs.length > 0 && foundPairs.length === cards.length / 2;
     
     const handleCardClick = useCallback((id: string) => {
@@ -32,7 +33,10 @@ const GameBoard: FC<GameBoardProps> = ({userName}) => {
                 setShowEndGame(true);
             }, END_GAME_TIMEOUT);
         }
+
         if (openPairs.length === 2) {
+            setGameHistory([...gameHistory, {user: userName}]);
+
             const [first, second] = openPairs;
             const firstPairId = first.split('-')[0];
             const secondPairId = second.split('-')[0];
@@ -57,6 +61,7 @@ const GameBoard: FC<GameBoardProps> = ({userName}) => {
         setFoundPairs([]);
         setShowEndGame(false);
         setDisabled(false);
+        setGameHistory([]);
         const newCards = createDeck(GameCardMode.FLAGS);
 
         setCards(newCards);
@@ -78,14 +83,16 @@ const GameBoard: FC<GameBoardProps> = ({userName}) => {
     }, [openPairs]);
 
     return (
-        <>  <EndGame
+        <> 
+            <EndGame
                 isOpen={showEndGame}
                 name={userName}
                 onModalClose={onModalClose}
                 restartGame={onGameRestart}
+                moves={gameHistory.length}
             />
             <div className={styles.root}>
-                <h2 className={styles.root__title}>Hello {userName}!</h2>
+                <h2 className={styles.root__title}>Hello {userName}! Moves: {gameHistory.length}</h2>
                 <div className={styles.root__boardContainer}>
                     {cards.map((card) => (
                         <GameCard
