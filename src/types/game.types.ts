@@ -27,7 +27,7 @@ export interface GameCardProps {
 }
 
 export interface EndGameProps {
-    score?: number;
+    moves?: number;
     name: string;
     isOpen: boolean;
     onModalClose?: () => void;
