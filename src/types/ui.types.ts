@@ -23,3 +23,13 @@ export interface ModalProps {
     closeModal?: () => void;
     onModalClose?: () => void;
 }
+
+export interface ToggleSwitchProps {
+    label: string;
+    id: string;
+    btnLabels?: {
+        yes: string;
+        no: string;
+    }
+    onChange: (state: boolean) => void;
+}

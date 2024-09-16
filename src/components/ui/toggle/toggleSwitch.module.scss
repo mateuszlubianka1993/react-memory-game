@@ -1,0 +1,101 @@
+.root {
+    display: flex;
+    gap: var(--space-x2);
+
+    &__labelText {
+        font-size: var(--space-x4);
+        color: var(--color-quinary);
+        font-weight: 700;
+        display: flex;
+        align-items: center;
+    }
+
+    &__control {
+        position: relative;
+        width: var(--space-x19);
+        display: inline-block;
+        vertical-align: middle;
+        -webkit-user-select: none;
+        -moz-user-select: none;
+        -ms-user-select: none;
+        user-select: none;
+        text-align: left;
+    }
+
+    &__input {
+        height: 0;
+        width: 0;
+        display: none;
+    }
+
+    &__label {
+        position: relative;
+        display: block;
+        overflow: hidden;
+        cursor: pointer;
+        border: 0 solid var(--color-gray);
+        border-radius: var(--space-x5);
+        margin: 0;
+    }
+
+    &__inner {
+        display: block;
+        width: 200%;
+        margin-left: -100%;
+        transition: margin 0.3s ease-in 0s;
+
+        &:before,
+        &:after {
+            display: block;
+            float: left;
+            width: 50%;
+            height: var(--space-x9);
+            padding: 0;
+            line-height: var(--space-x9);
+            font-size: 14px;
+            color: var(--color-white);
+            font-weight: bold;
+            box-sizing: border-box;
+        }
+
+        &:before {
+            content: attr(data-checked);
+            text-transform: uppercase;
+            padding-left: var(--space-x3);
+            background-color: var(--color-quinary);
+            color: var(--color-white);
+        }
+
+        &:after {
+            content: attr(data-unchecked);
+            text-transform: uppercase;
+            padding-right: var(--space-x3);
+            background-color: var(--color-gray);
+            color: var(--color-white);
+            text-align: right;
+        }
+
+        &.checked {
+            margin-left: 0;
+        }
+    }
+
+    &__btn {
+        display: block;
+        width: var(--space-x6);
+        height: var(--space-x6);
+        margin: 5px;
+        background: var(--color-white);
+        position: absolute;
+        top: 0;
+        bottom: 0;
+        right: 40px;
+        border: 0 solid var(--color-gray);
+        border-radius: var(--space-x5);
+        transition: all 0.3s ease-in 0s;
+
+        &.checked {
+            right: 0px;
+        }
+    }
+}
