@@ -1,59 +1,100 @@
-import { FC, useState, useEffect, useCallback } from "react";
+import { FC, useState, useEffect, useCallback, useRef } from "react";
 import { GameCard, EndGame } from "../../components";
 import { createDeck } from "../../helpers/createDeck";
-import { DeckItem, GameBoardProps, GameCardMode } from '../../types';
-import { ROUND_TIME, BLOCK_TIME, END_GAME_TIMEOUT } from "../../config/game";
+import { DeckItem, GameBoardProps, GameCardMode, GameHistoryItem } from '../../types';
+import { ROUND_TIME, END_GAME_TIMEOUT, COMPUTER_NAME } from "../../config/game";
 import styles from "./gameBoard.module.scss";
 
-const GameBoard: FC<GameBoardProps> = ({userName}) => {
+const GameBoard: FC<GameBoardProps> = ({ gameConfig }) => {
+    const [cards, setCards] = useState<DeckItem[]>(createDeck(GameCardMode.FLAGS));
     const [openPairs, setOpenPairs] = useState<string[]>([]);
     const [foundPairs, setFoundPairs] = useState<string[]>([]);
-    const [cards, setCards] = useState<DeckItem[]>([]);
     const [disabled, setDisabled] = useState(false);
+    const { userName, multiplayer: isMultiplayer } = gameConfig;
+    const players = isMultiplayer ? [userName, COMPUTER_NAME] : [userName];
+    const [currentPlayer, setCurrentPlayer] = useState(players[0]);
     const [showEndGame, setShowEndGame] = useState(false);
-    const [gameHistory, setGameHistory] = useState<any>([]);
+    const [gameHistory, setGameHistory] = useState<GameHistoryItem[]>([]);
     const endGame = foundPairs.length > 0 && foundPairs.length === cards.length / 2;
-    
+    const moves = !isMultiplayer && gameHistory.length;
+    const timeoutRef = useRef(null);
+
     const handleCardClick = useCallback((id: string) => {
-        setOpenPairs(prevState => [...prevState, id]);
-    }, []);
+        if (openPairs.length === 1) {
+            setOpenPairs((prev) => [...prev, id]);
+        } else {
+            setOpenPairs([id]);
+        }
+    }, [openPairs]);
+
     const isCardOpen = (id: string) => {
         const found = openPairs.find(openId => openId === id) || foundPairs.find(foundId =>  id.includes(foundId));
 
         return !!found;
     };
 
-    const onModalClose = useCallback(() => {
-        setShowEndGame(false);
-    }, []);
-
     const checkPairs = () => {
+        const [first, second] = openPairs;
+        const firstPairId = first.split('-')[0];
+        const secondPairId = second.split('-')[0];
+        const isPair = firstPairId === secondPairId;
+
+        setGameHistory(prevState => [...prevState, { user: currentPlayer, foundPair: isPair }]);
+
+        if (isPair) {
+            setFoundPairs(prevState => [...prevState, firstPairId]);
+            setOpenPairs([]);
+        } else {
+            setOpenPairs([]);
+            setCurrentPlayer(currentPlayer === players[0] ? players[1] : players[0]);
+        }
+    };
+
+    const handleComputerTurn = () => {
+        const availablePairs = cards.filter(card => !foundPairs.includes(card.pairId));
+        
+        if (availablePairs.length < 2) return;
+
+        const getRandomIndex = (excludeIndex?: number) => {
+            let index;
+            do {
+                index = Math.floor(Math.random() * availablePairs.length);
+            } while (index === excludeIndex);
+            return index;
+        };
+
+        const randomIndex1 = getRandomIndex();
+
+        setTimeout(() => {
+            handleCardClick(availablePairs[randomIndex1].id);
+        }, 1000);
+    };
+
+    useEffect(() => {
         if (endGame) {
-            return setTimeout(() => {
+            setTimeout(() => {
                 setShowEndGame(true);
             }, END_GAME_TIMEOUT);
         }
 
         if (openPairs.length === 2) {
-            setGameHistory([...gameHistory, {user: userName}]);
+            setDisabled(true);
 
-            const [first, second] = openPairs;
-            const firstPairId = first.split('-')[0];
-            const secondPairId = second.split('-')[0];
+            setTimeout(() => {
+                checkPairs();
+                setDisabled(false);
+            }, ROUND_TIME);
 
-            if (firstPairId === secondPairId) {
-                setFoundPairs(precState => [...precState, firstPairId]);
-                return setTimeout(() => {
-                    setOpenPairs([]);
-                    setDisabled(false);
-                }, BLOCK_TIME);
-            } else {
-                return setTimeout(() => {
-                    setOpenPairs([]);
-                    setDisabled(false);
-                }, ROUND_TIME);
-            }
+            return;
         }
+
+        if (currentPlayer === COMPUTER_NAME) {
+            handleComputerTurn();
+        }
+    }, [openPairs]);
+
+    const onModalClose = () => {
+        setShowEndGame(false);
     };
 
     const onGameRestart = () => {
@@ -66,21 +107,6 @@ const GameBoard: FC<GameBoardProps> = ({userName}) => {
 
         setCards(newCards);
     };
-    
-    useEffect(() => {
-        const cards = createDeck(GameCardMode.FLAGS);
-
-        setCards(cards);
-    }, []);
-
-    useEffect(() => {
-        if (openPairs.length === 2) {
-            setDisabled(true);
-        }
-        const timer = checkPairs();
-
-        return () => clearTimeout(timer);
-    }, [openPairs]);
 
     return (
         <> 
@@ -89,10 +115,16 @@ const GameBoard: FC<GameBoardProps> = ({userName}) => {
                 name={userName}
                 onModalClose={onModalClose}
                 restartGame={onGameRestart}
-                moves={gameHistory.length}
+                gameHistory={gameHistory}
+                isMultiplayer={isMultiplayer}
             />
             <div className={styles.root}>
-                <h2 className={styles.root__title}>Hello {userName}! Moves: {gameHistory.length}</h2>
+                {!isMultiplayer ? (
+                    <h2 className={styles.root__title}>Hello {userName}! Moves: {moves}</h2>
+                ) : (
+                    <h2 className={styles.root__title}>{currentPlayer}'s turn!</h2>
+                )}
+                
                 <div className={styles.root__boardContainer}>
                     {cards.map((card) => (
                         <GameCard

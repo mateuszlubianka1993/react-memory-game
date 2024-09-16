@@ -1,9 +1,14 @@
+export interface GameConfig {
+    userName: string;
+    multiplayer: boolean;
+}
+
 export interface GameCreatorProps {
-    onGameCreated: (userName: string) => void;
+    onGameCreated: (gameConfig: GameConfig) => void;
 }
 
 export interface GameBoardProps {
-    userName: string;
+    gameConfig: GameConfig;
 }
 
 export enum GameCardMode {
@@ -26,10 +31,16 @@ export interface GameCardProps {
     disabled?: boolean;
 }
 
+export interface GameHistoryItem {
+    user: string;
+    foundPair: boolean;
+}
+
 export interface EndGameProps {
-    moves?: number;
     name: string;
     isOpen: boolean;
     onModalClose?: () => void;
     restartGame: () => void;
+    gameHistory: GameHistoryItem[];
+    isMultiplayer: boolean;
 }

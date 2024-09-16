@@ -39,7 +39,7 @@ const GameCard: FC<GameCardProps> = ({
 
     return (
         <div
-            className={styles.root}
+            className={`${styles.root} ${isFlipped ? 'flipped' : ''}`}
             onClick={() => handleClick(card.id)}
         > 
             <div className={`${styles.root__inner} ${isFlipped ? styles.root__inner__flipped : ''}`}>

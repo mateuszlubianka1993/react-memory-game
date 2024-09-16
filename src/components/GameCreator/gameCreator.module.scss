@@ -9,4 +9,8 @@
         font-weight: 700;
         text-align: center;
     }
+
+    &__userBox {
+        padding-bottom: var(--space-x2);
+    }
 }

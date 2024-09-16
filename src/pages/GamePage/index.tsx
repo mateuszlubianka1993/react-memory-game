@@ -7,13 +7,15 @@ import {
     Button,
 } from "../../components";
 import { ROUTER_PATHS } from "../../config/router";
+import { GameConfig } from "../../types";
 
 const GamePage: FC = () => {
-    const [userName, setUserName] = useState<string>('');
+    const [gameConfig, setGameConfig] = useState<GameConfig>({userName: '', multiplayer: false});
     const navigate = useNavigate();
+    const startGame = gameConfig.userName;
 
-    const onGameCreated = (userName: string) => {
-        setUserName(userName);
+    const onGameCreated = (config: GameConfig) => {
+        setGameConfig(config);
     };
 
     const handleQuitGame = () => {
@@ -22,7 +24,7 @@ const GamePage: FC = () => {
 
     return (
         <div>
-            {!userName ? (
+            {!startGame ? (
                 <>
                     <Header />
                     <GameCreator onGameCreated={onGameCreated} />
@@ -35,7 +37,7 @@ const GamePage: FC = () => {
                         </Button>
                     </nav>
                     <main>
-                        <GameBoard userName={userName} />
+                        <GameBoard gameConfig={gameConfig} />
                     </main>
                 </>
             )}

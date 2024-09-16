@@ -7,6 +7,8 @@ import GameBoard from "./GameBoard/GameBoard";
 import GameCard from "./GameCard/GameCard";
 import Modal from "./ui/modal/Modal";
 import EndGame from "./EndGame/EndGame";
+import ToggleSwitch from "./ui/toggle/ToggleSwitch";
+import MultiplayerConfigurator from "./MultiplayerConfigurator/MultiplayerConfigurator";
 
 export {
     Header,
@@ -18,4 +20,6 @@ export {
     GameCard,
     Modal,
     EndGame,
+    ToggleSwitch,
+    MultiplayerConfigurator,
 };
