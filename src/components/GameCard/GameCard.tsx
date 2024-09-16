@@ -29,7 +29,7 @@ const GameCard: FC<GameCardProps> = ({
     const label = getLabel(mode);
 
     const handleClick = (id: string) => {
-        if (disabled) return;
+        if (disabled || isOpen) return;
 
         onClick(id);
 
