@@ -16,5 +16,9 @@
 
     &__actions {
         margin-top: var(--space-x5);
+
+        &__saveBtn {
+            margin-bottom: var(--space-x2);
+        }
     }
 }
