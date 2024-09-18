@@ -48,6 +48,8 @@
     --non-photo-blue: #90e0efff;
     --non-photo-blue-2: #ade8f4ff;
     --light-cyan: #caf0f8ff;
+        // RGB
+        --honolulu-blue-rgb: rgb(0, 119, 182);
 
     .theme-light {
         --background-color: var(--light-cyan);
@@ -57,9 +59,13 @@
         --color-quaternary: var(--light-cyan);
         --color-quinary: var(--marian-blue);
         --color-senary: var(--non-photo-blue);
+            // RGB
+            --color-primary-rgb: var(--honolulu-blue-rgb);
 
         --color-error: var(--color-pink1);
         --backdrop-color: rgba(0, 0, 0, .7);
+
+        --table-header-bg: rgba(0, 119, 182, 0.6);
     }
 
     .theme-dark {

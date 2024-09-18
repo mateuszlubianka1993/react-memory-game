@@ -1,0 +1,21 @@
+.root {
+    &__table {
+        padding: 0 var(--space-x2);
+        font-weight: 500;
+    }
+
+    &__title {
+        font-size: var(--space-x6);
+        font-weight: 500;
+        color: var(--color-primary);
+        margin-bottom: var(--space-x5);
+        margin-top: var(--space-x6);
+        text-align: center;
+    }
+
+    &__noData {
+        display: flex;
+        justify-content: center;
+        margin-top: var(--space-x6);
+    }
+}

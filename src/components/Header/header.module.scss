@@ -7,11 +7,19 @@
     display: flex;
     justify-content: center;
     align-items: center;
-    gap: var(--space-x3);
+
+    &__link {
+        display: flex;
+        gap: var(--space-x3);
+        text-decoration: none;
+
+        @include tablet-up {
+            gap: var(--space-x4);
+        }
+    }
 
     @include tablet-up {
         padding: var(--space-x8) var(--space-x3);
-        gap: var(--space-x4);
     }
 
     &__log {

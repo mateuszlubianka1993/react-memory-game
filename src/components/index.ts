@@ -9,6 +9,7 @@ import Modal from "./ui/modal/Modal";
 import EndGame from "./EndGame/EndGame";
 import ToggleSwitch from "./ui/toggle/ToggleSwitch";
 import MultiplayerConfigurator from "./MultiplayerConfigurator/MultiplayerConfigurator";
+import Table from "./ui/table/Table";
 
 export {
     Header,
@@ -22,4 +23,5 @@ export {
     EndGame,
     ToggleSwitch,
     MultiplayerConfigurator,
+    Table,
 };

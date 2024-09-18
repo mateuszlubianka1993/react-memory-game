@@ -33,3 +33,11 @@ export interface ToggleSwitchProps {
     }
     onChange: (state: boolean) => void;
 }
+
+export interface TableProps {
+    headers: {
+        id: string;
+        text: string;
+    }[];
+    data: Array<{ [key: string]: any }>;
+}
