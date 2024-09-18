@@ -1,4 +1,4 @@
-import { FC, useState, useEffect, useCallback, useRef } from "react";
+import { FC, useState, useEffect, useCallback } from "react";
 import { GameCard, EndGame } from "../../components";
 import { createDeck } from "../../helpers/createDeck";
 import { DeckItem, GameBoardProps, GameCardMode, GameHistoryItem } from '../../types';
@@ -17,7 +17,6 @@ const GameBoard: FC<GameBoardProps> = ({ gameConfig }) => {
     const [gameHistory, setGameHistory] = useState<GameHistoryItem[]>([]);
     const endGame = foundPairs.length > 0 && foundPairs.length === cards.length / 2;
     const moves = !isMultiplayer && gameHistory.length;
-    const timeoutRef = useRef(null);
 
     const handleCardClick = useCallback((id: string) => {
         if (openPairs.length === 1) {
