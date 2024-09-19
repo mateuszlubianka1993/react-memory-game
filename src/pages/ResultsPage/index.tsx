@@ -1,7 +1,6 @@
 import { FC } from "react";
 import { useNavigate } from "react-router-dom";
 import {
-    Header,
     Table,
     Button,
 } from "../../components";
@@ -21,7 +20,6 @@ const ResultsPage: FC = () => {
 
     return (
         <div className={styles.root}>
-            <Header />
             <h1 className={styles.root__title}>Best results</h1>
             <div className={styles.root__table}>
                 <Table headers={RESULTS_HEADERS} data={tableData} />
