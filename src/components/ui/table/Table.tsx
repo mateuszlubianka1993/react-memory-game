@@ -56,12 +56,12 @@ const Table: FC<TableProps> = ({ headers, data }) => {
 
         return <div className={styles.sortArrow}>
             <div
-                className={`${styles.sortArrow__icon} ${isArrowActive(SORT_TYPES.ASCENDING) ? styles.active : ''}`}
+                className={`${styles.sortArrow__icon} ${isArrowActive(SORT_TYPES.ASCENDING) ? styles.active : undefined}`}
             >
                 <BiSolidUpArrow />
             </div>
             <div
-                className={`${styles.sortArrow__icon} ${isArrowActive(SORT_TYPES.DESCENDING) ? styles.active : ''}`}
+                className={`${styles.sortArrow__icon} ${isArrowActive(SORT_TYPES.DESCENDING) ? styles.active : undefined}`}
             >
                 <BiSolidDownArrow />
             </div>

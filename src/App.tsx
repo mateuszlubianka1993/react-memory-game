@@ -3,9 +3,7 @@ import {
   RouterProvider,
 } from "react-router-dom";
 import { MainLayout } from "./layouts";
-import HomePage from "./pages/HomePage";
-import GamePage from "./pages/GamePage";
-import ResultsPage from "./pages/ResultsPage";
+import { HomePage, GamePage, ResultsPage, ErrorPage } from "./pages";
 import { ROUTER_PATHS } from "./config/router";
 import "./App.scss"
 
@@ -13,6 +11,7 @@ const router = createBrowserRouter([
   {
     path: ROUTER_PATHS.ROOT,
     element: <MainLayout />,
+    errorElement: <ErrorPage />,
     children: [
       {
         path: ROUTER_PATHS.HOME,

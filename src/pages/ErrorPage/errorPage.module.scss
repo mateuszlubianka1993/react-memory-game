@@ -1,0 +1,25 @@
+.root {
+    padding: var(--space-x12) var(--space-x2);
+    text-align: center;
+    color: var(--color-primary);
+
+    &__content {
+        padding: var(--space-x7) var(--space-x2);
+        border: 2px solid var(--color-primary);
+        border-radius: var(--space);
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        gap: var(--space-x4);
+    }
+
+    &__title {
+        font-size: var(--space-x7);
+        font-weight: 700;
+    }
+
+    &__text {
+        font-size: var(--space-x4);
+    }
+}
