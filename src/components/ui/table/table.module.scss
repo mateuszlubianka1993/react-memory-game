@@ -12,6 +12,12 @@
             font-size: var(--space-x3);
             color: var(--color-white);
             text-transform: uppercase;
+
+            &__content {
+                display: flex;
+                align-items: center;
+                gap: var(--space);
+            }
         }
     }
 
@@ -28,12 +34,23 @@
 
         &__cell {
             padding: var(--space-x5) var(--space-x4);
-            text-align: left;
+            text-align: center;
             vertical-align:middle;
             font-weight: 300;
             font-size: var(--space-x3);
             color: var(--color-primary);
             border-bottom: solid 1px var(--color-senary);
+        }
+    }
+}
+
+.sortArrow {
+    font-size: 9px;
+    color: var(--color-gray);
+
+    &__icon {
+        &.active {
+            color: var(--color-white);
         }
     }
 }

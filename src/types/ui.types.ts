@@ -1,4 +1,9 @@
 import { ChangeEvent, ReactNode } from "react";
+import { SORT_TYPES } from "../config/ui";
+
+const { ASCENDING, DESCENDING } = SORT_TYPES;
+type ASCENDING = string;
+type DESCENDING = string;
 
 export interface InputProps {
     label: string;
@@ -34,10 +39,20 @@ export interface ToggleSwitchProps {
     onChange: (state: boolean) => void;
 }
 
+export interface TableHeaderItem {
+    id: string;
+    text: string;
+    sortable?: boolean;
+}
+
 export interface TableProps {
-    headers: {
-        id: string;
-        text: string;
-    }[];
+    headers: TableHeaderItem[];
     data: Array<{ [key: string]: any }>;
+}
+
+export type SortType = ASCENDING | DESCENDING;
+
+export interface TableSortConfig {
+    key: string;
+    direction: SortType;
 }
