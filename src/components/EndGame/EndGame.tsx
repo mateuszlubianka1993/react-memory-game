@@ -1,6 +1,6 @@
 import { FC, useRef, useEffect, useState } from "react";
 import { Modal, Button } from "../../components";
-import { ModalProps, EndGameProps, GameCardMode } from '../../types';
+import { ModalProps, EndGameProps } from '../../types';
 import styles from "./endGame.module.scss";
 
 const EndGame: FC<EndGameProps> = ({
@@ -8,6 +8,7 @@ const EndGame: FC<EndGameProps> = ({
     name,
     isMultiplayer,
     gameHistory,
+    deckType,
     restartGame,
     onModalClose,
 }) => {
@@ -38,7 +39,7 @@ const EndGame: FC<EndGameProps> = ({
         const result = {
             name,
             moves,
-            mode: GameCardMode.FLAGS,
+            mode: deckType,
             date: new Date().toISOString(),
         };
 

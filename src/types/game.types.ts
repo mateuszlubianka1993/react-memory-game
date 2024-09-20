@@ -1,6 +1,13 @@
+import { GAME_CARD_MODES } from "../config/game";
+
+const { FLAGS, LOGOS } = GAME_CARD_MODES;
+type FLAGS = string;
+type LOGOS = string;
+
 export interface GameConfig {
     userName: string;
     multiplayer: boolean;
+    mode: GameCardMode;
 }
 
 export interface GameCreatorProps {
@@ -11,15 +18,13 @@ export interface GameBoardProps {
     gameConfig: GameConfig;
 }
 
-export enum GameCardMode {
-    FLAGS = "FLAGS",
-}
+export type GameCardMode = FLAGS | LOGOS;
 
 export interface DeckItem {
     pairId: string;
     img: string;
     name: string;
-    id: string;
+    id?: string;
 }
 
 export interface GameCardProps {
@@ -43,4 +48,11 @@ export interface EndGameProps {
     restartGame: () => void;
     gameHistory: GameHistoryItem[];
     isMultiplayer: boolean;
+    deckType: GameCardMode;
+}
+
+export interface ModeItemProps {
+    modeName: GameCardMode;
+    active: boolean;
+    onClick: (mode: GameCardMode) => void;
 }
