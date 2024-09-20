@@ -8,7 +8,6 @@ import GameCard from "./GameCard/GameCard";
 import Modal from "./ui/modal/Modal";
 import EndGame from "./EndGame/EndGame";
 import ToggleSwitch from "./ui/toggle/ToggleSwitch";
-import MultiplayerConfigurator from "./MultiplayerConfigurator/MultiplayerConfigurator";
 import Table from "./ui/table/Table";
 
 export {
@@ -22,6 +21,5 @@ export {
     Modal,
     EndGame,
     ToggleSwitch,
-    MultiplayerConfigurator,
     Table,
 };

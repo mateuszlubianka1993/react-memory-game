@@ -1,12 +1,15 @@
 import { FC, useState, useEffect } from "react";
 import { GiBlackFlag } from "react-icons/gi";
 import { GameCardProps, GameCardMode } from "../../types";
+import { GAME_CARD_MODES } from "../../config/game";
 import styles from "./gameCard.module.scss";
 
 function getLabel(mode: GameCardMode): string {
     switch (mode) {
-        case GameCardMode.FLAGS:
+        case GAME_CARD_MODES.FLAGS:
             return 'Flags';
+        case GAME_CARD_MODES.LOGOS:
+                return 'Logos';
         default:
             return '';
     }
@@ -14,7 +17,7 @@ function getLabel(mode: GameCardMode): string {
 
 const GameCard: FC<GameCardProps> = ({
     card,
-    mode = GameCardMode.FLAGS,
+    mode = GAME_CARD_MODES.FLAGS,
     isOpen = false,
     blockClickOpen = false,
     disabled = false,
@@ -28,8 +31,8 @@ const GameCard: FC<GameCardProps> = ({
     let icon = <GiBlackFlag />;
     const label = getLabel(mode);
 
-    const handleClick = (id: string) => {
-        if (disabled || isOpen) return;
+    const handleClick = (id: string | undefined) => {
+        if (disabled || isOpen || !id) return;
 
         onClick(id);
 

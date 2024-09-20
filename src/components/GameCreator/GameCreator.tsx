@@ -1,12 +1,15 @@
-import { FC, useState, ChangeEvent } from "react";
-import { Input, Button, MultiplayerConfigurator } from "../../components";
-import { GameCreatorProps } from '../../types';
+import { FC, useState, ChangeEvent, useCallback } from "react";
+import { Input, Button } from "../../components";
+import { ModeItem, MultiplayerConfigurator } from "./components";
+import { GameCreatorProps, GameCardMode } from '../../types';
 import styles from "./gameCreator.module.scss";
+import { GAME_CARD_MODES } from "../../config/game";
 
 const GameCreator: FC<GameCreatorProps> = ({ onGameCreated }) => {
     const [userName, setUserName] = useState<string>('');
     const [wasInputTouched, setWasInputTouched] = useState<boolean>(false);
     const [multiplayer, setMultiplayer] = useState<boolean>(false);
+    const [deckType, setDeckType] = useState<GameCardMode>(GAME_CARD_MODES.FLAGS);
 
     const isInputValid = !!userName && userName.length >= 3;
 
@@ -21,13 +24,21 @@ const GameCreator: FC<GameCreatorProps> = ({ onGameCreated }) => {
             return;
         }
 
-        onGameCreated({userName, multiplayer});
+        onGameCreated({
+            userName,
+            multiplayer,
+            mode: deckType,
+        });
     };
+
+    const handleModeChange = useCallback((mode: GameCardMode) => {
+        setDeckType(mode);
+    }, []);
 
     return (
         <div className={styles.root}>
             <h2 className={styles.root__title}>Create a New Game</h2>
-            <div>
+            <div className={styles.root__section}>
                 <div className={styles.root__userBox}>
                     <Input
                         label="User Name"
@@ -38,16 +49,31 @@ const GameCreator: FC<GameCreatorProps> = ({ onGameCreated }) => {
                         onBlur={() => setWasInputTouched(true)}
                     />
                 </div>
+                <div className={styles.root__modeBox}>
+                    {Object.values(GAME_CARD_MODES).map((mode: string) => (
+                        <div key={mode} className={styles.root__modeBox__item}>
+                            <ModeItem
+                                modeName={mode}
+                                onClick={handleModeChange}
+                                active={mode === deckType}
+                            />
+                        </div>
+                    ))}
+                </div>
+            </div>
+            <div className={styles.root__section}>
                 <div>
                     <MultiplayerConfigurator onChange={(state) => setMultiplayer(state)}/>
                 </div>
             </div>
-            <Button
-                disabled={!isInputValid}
-                onClick={handleCreateGame}
-            >
-                Start Game
-            </Button>
+            <div className={styles.root__section}>
+                <Button
+                    disabled={!isInputValid}
+                    onClick={handleCreateGame}
+                >
+                    Start Game
+                </Button>
+            </div>
         </div>
     );
 };

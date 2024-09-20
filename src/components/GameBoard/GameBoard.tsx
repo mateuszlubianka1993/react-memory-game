@@ -1,16 +1,16 @@
 import { FC, useState, useEffect, useCallback } from "react";
 import { GameCard, EndGame } from "../../components";
 import { createDeck } from "../../helpers/createDeck";
-import { DeckItem, GameBoardProps, GameCardMode, GameHistoryItem } from '../../types';
+import { DeckItem, GameBoardProps, GameHistoryItem } from '../../types';
 import { ROUND_TIME, END_GAME_TIMEOUT, COMPUTER_NAME } from "../../config/game";
 import styles from "./gameBoard.module.scss";
 
 const GameBoard: FC<GameBoardProps> = ({ gameConfig }) => {
-    const [cards, setCards] = useState<DeckItem[]>(createDeck(GameCardMode.FLAGS));
+    const { userName, multiplayer: isMultiplayer, mode: deckType } = gameConfig;
+    const [cards, setCards] = useState<DeckItem[]>(createDeck(deckType));
     const [openPairs, setOpenPairs] = useState<string[]>([]);
     const [foundPairs, setFoundPairs] = useState<string[]>([]);
     const [disabled, setDisabled] = useState(false);
-    const { userName, multiplayer: isMultiplayer } = gameConfig;
     const players = isMultiplayer ? [userName, COMPUTER_NAME] : [userName];
     const [currentPlayer, setCurrentPlayer] = useState(players[0]);
     const [showEndGame, setShowEndGame] = useState(false);
@@ -18,7 +18,9 @@ const GameBoard: FC<GameBoardProps> = ({ gameConfig }) => {
     const endGame = foundPairs.length > 0 && foundPairs.length === cards.length / 2;
     const moves = !isMultiplayer && gameHistory.length;
 
-    const handleCardClick = useCallback((id: string) => {
+    const handleCardClick = useCallback((id: string | undefined) => {
+        if (!id || disabled) return;
+
         if (openPairs.length === 1) {
             setOpenPairs((prev) => [...prev, id]);
         } else {
@@ -26,7 +28,11 @@ const GameBoard: FC<GameBoardProps> = ({ gameConfig }) => {
         }
     }, [openPairs]);
 
-    const isCardOpen = (id: string) => {
+    const isCardOpen = (card: DeckItem) => {
+        const { id } = card;
+
+        if (!id) return false;
+    
         const found = openPairs.find(openId => openId === id) || foundPairs.find(foundId =>  id.includes(foundId));
 
         return !!found;
@@ -102,7 +108,7 @@ const GameBoard: FC<GameBoardProps> = ({ gameConfig }) => {
         setShowEndGame(false);
         setDisabled(false);
         setGameHistory([]);
-        const newCards = createDeck(GameCardMode.FLAGS);
+        const newCards = createDeck(deckType);
 
         setCards(newCards);
     };
@@ -116,6 +122,7 @@ const GameBoard: FC<GameBoardProps> = ({ gameConfig }) => {
                 restartGame={onGameRestart}
                 gameHistory={gameHistory}
                 isMultiplayer={isMultiplayer}
+                deckType={deckType}
             />
             <div className={styles.root}>
                 {!isMultiplayer ? (
@@ -132,7 +139,8 @@ const GameBoard: FC<GameBoardProps> = ({ gameConfig }) => {
                             onClick={handleCardClick}
                             blockClickOpen={true}
                             disabled={disabled}
-                            isOpen={isCardOpen(card.id)}
+                            isOpen={isCardOpen(card)}
+                            mode={deckType}
                         />
                     ))}
                 </div>
