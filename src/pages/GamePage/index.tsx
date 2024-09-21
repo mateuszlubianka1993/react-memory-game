@@ -1,45 +1,31 @@
 import { FC, useState } from "react";
-import { useNavigate } from "react-router-dom";
 import {
     GameCreator,
-    Header,
     GameBoard,
-    Button,
 } from "../../components";
-import { ROUTER_PATHS } from "../../config/router";
+import { GAME_CARD_MODES } from "../../config/game";
 import { GameConfig } from "../../types";
 
 const GamePage: FC = () => {
-    const [gameConfig, setGameConfig] = useState<GameConfig>({userName: '', multiplayer: false});
-    const navigate = useNavigate();
+    const [gameConfig, setGameConfig] = useState<GameConfig>({
+        userName: '',
+        multiplayer: false,
+        mode: GAME_CARD_MODES.FLAGS,
+    });
     const startGame = gameConfig.userName;
 
     const onGameCreated = (config: GameConfig) => {
         setGameConfig(config);
     };
 
-    const handleQuitGame = () => {
-        navigate(ROUTER_PATHS.HOME);
-    };
-
     return (
         <div>
             {!startGame ? (
-                <>
-                    <Header />
-                    <GameCreator onGameCreated={onGameCreated} />
-                </>
+                <GameCreator onGameCreated={onGameCreated} />
             ) : (
-                <>
-                    <nav>
-                        <Button onClick={handleQuitGame}>
-                            Quit the game
-                        </Button>
-                    </nav>
-                    <main>
-                        <GameBoard gameConfig={gameConfig} />
-                    </main>
-                </>
+                <main>
+                    <GameBoard gameConfig={gameConfig} />
+                </main>
             )}
         </div>
     );

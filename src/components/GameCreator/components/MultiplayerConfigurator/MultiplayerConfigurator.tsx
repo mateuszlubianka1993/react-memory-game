@@ -1,6 +1,5 @@
 import { FC } from "react";
-import { ToggleSwitch } from "../../components";
-import styles from "./multiplayerConfigurator.module.scss";
+import { ToggleSwitch } from "../../../../components";
 
 interface MultiplayerConfiguratorProps {
     onChange: (state: boolean) => void;
@@ -9,7 +8,7 @@ interface MultiplayerConfiguratorProps {
 const MultiplayerConfigurator: FC<MultiplayerConfiguratorProps> = ({onChange}) => {
 
     return (
-        <div className={styles.root}>
+        <div>
             <ToggleSwitch
                 label="Enable multiplayer"
                 id="switchBtn"
