@@ -3,7 +3,7 @@ import {
   RouterProvider,
 } from "react-router-dom";
 import { MainLayout } from "./layouts";
-import { HomePage, GamePage, ResultsPage, ErrorPage } from "./pages";
+import { HomePage, GamePage, ResultsPage, ErrorPage, AboutPage } from "./pages";
 import { ROUTER_PATHS } from "./config/router";
 import "./App.scss"
 
@@ -24,6 +24,10 @@ const router = createBrowserRouter([
       {
         path: ROUTER_PATHS.BEST_RESULTS,
         element: <ResultsPage />,
+      },
+      {
+        path: ROUTER_PATHS.ABOUT,
+        element: <AboutPage />,
       },
     ],
   },
