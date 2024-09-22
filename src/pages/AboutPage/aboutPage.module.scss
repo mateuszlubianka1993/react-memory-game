@@ -1,0 +1,16 @@
+.root {
+    text-align: center;
+    padding: var(--space-x12) var(--space-x4);
+    color: var(--color-primary);
+
+    &__title {
+        font-size: var(--space-x7);
+        font-weight: 700;
+        margin-bottom: var(--space-x2);
+    }
+
+    &__info {
+        font-size: var(--space-x4);
+        margin-bottom: var(--space-x2);
+    }
+}
