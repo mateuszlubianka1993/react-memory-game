@@ -1,13 +1,19 @@
+import { lazy, Suspense } from "react";
 import { createBrowserRouter } from "react-router-dom";
 import { MainLayout } from "./layouts";
-import { HomePage, GamePage, ResultsPage, ErrorPage, AboutPage } from "./pages";
 import { ROUTER_PATHS } from "./config/router";
+
+import HomePage from "./pages/HomePage";
+const GamePage = lazy(() => import("./pages/GamePage"));
+const ResultsPage = lazy(() => import("./pages/ResultsPage"));
+const ErrorPage = lazy(() => import("./pages/ErrorPage"));
+const AboutPage = lazy(() => import("./pages/AboutPage"));
 
 const router = createBrowserRouter([
   {
     path: ROUTER_PATHS.ROOT,
     element: <MainLayout />,
-    errorElement: <ErrorPage />,
+    errorElement: <Suspense fallback={<p>Loading</p>}><ErrorPage /></Suspense>,
     children: [
       {
         path: ROUTER_PATHS.HOME,
@@ -15,15 +21,15 @@ const router = createBrowserRouter([
       },
       {
         path: ROUTER_PATHS.NEW_GAME,
-        element: <GamePage />,
+        element: <Suspense fallback={<p>Loading</p>}><GamePage /></Suspense>,
       },
       {
         path: ROUTER_PATHS.BEST_RESULTS,
-        element: <ResultsPage />,
+        element: <Suspense fallback={<p>Loading</p>}><ResultsPage /></Suspense>,
       },
       {
         path: ROUTER_PATHS.ABOUT,
-        element: <AboutPage />,
+        element: <Suspense fallback={<p>Loading</p>}><AboutPage /></Suspense>,
       },
     ],
   },
