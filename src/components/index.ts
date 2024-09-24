@@ -9,6 +9,8 @@ import Modal from "./ui/modal/Modal";
 import EndGame from "./EndGame/EndGame";
 import ToggleSwitch from "./ui/toggle/ToggleSwitch";
 import Table from "./ui/table/Table";
+import Spinner from "./ui/spinner/Spinner";
+import PageLoader from "./PageLoader/PageLoader";
 
 export {
     Header,
@@ -22,4 +24,6 @@ export {
     EndGame,
     ToggleSwitch,
     Table,
+    PageLoader,
+    Spinner,
 };

@@ -1,0 +1,20 @@
+.root {
+    padding: var(--space-x22) var(--space-x6);
+    display: flex;
+    justify-content: center;
+    justify-items: center;
+    flex-direction: column;
+    gap: var(--space-x6);
+
+    &__spinner {
+        display: flex;
+        justify-content: center;
+    }
+
+    &__text {
+        font-size: var(--space-x6);
+        font-weight: bold;
+        text-align: center;
+        color: var(--color-primary);
+    }
+}
