@@ -8,6 +8,13 @@
     border: 2px solid var(--color-primary);
     overflow: hidden;
     width: 85%;
+    z-index: 999;
+
+    &__overlay {
+        position: fixed;
+        inset: 0;
+        background-color: var(--backdrop-color);
+    }
 
     @include tablet-up {
         width: 65%;

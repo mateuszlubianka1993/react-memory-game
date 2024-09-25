@@ -23,7 +23,7 @@ export interface ButtonProps {
 
 export interface ModalProps {
     children: ReactNode;
-    ref: any;
+    wrapperId?: string;
     openModal?: () => void;
     closeModal?: () => void;
     onModalClose?: () => void;
