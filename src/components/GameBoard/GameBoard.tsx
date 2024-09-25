@@ -1,4 +1,5 @@
 import { FC, useState, useEffect, useCallback } from "react";
+import { motion } from "framer-motion";
 import { GameCard, EndGame } from "../../components";
 import { createDeck } from "../../helpers/createDeck";
 import { DeckItem, GameBoardProps, GameHistoryItem } from '../../types';
@@ -131,7 +132,16 @@ const GameBoard: FC<GameBoardProps> = ({ gameConfig }) => {
                     <h2 className={styles.root__title}>{currentPlayer}'s turn!</h2>
                 )}
                 
-                <div className={styles.root__boardContainer}>
+                <motion.div
+                    className={styles.root__boardContainer}
+                    variants={{
+                        hidden: { opacity: 0 },
+                        visible: { opacity: 1, transition: { staggerChildren: 0.1 },},
+                    }}
+                    initial="hidden"
+                    animate="visible"
+                    exit="hidden"
+                >
                     {cards.map((card) => (
                         <GameCard
                             key={card.id}
@@ -143,7 +153,7 @@ const GameBoard: FC<GameBoardProps> = ({ gameConfig }) => {
                             mode={deckType}
                         />
                     ))}
-                </div>
+                </motion.div>
             </div>
         </>
     );
