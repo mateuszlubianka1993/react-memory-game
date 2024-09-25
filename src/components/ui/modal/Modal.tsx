@@ -1,44 +1,73 @@
-import { FC, useRef, forwardRef, useImperativeHandle } from "react";
+import { FC, useState, useLayoutEffect } from "react";
 import { createPortal } from "react-dom";
 import { RiCloseLargeLine } from "react-icons/ri";
+import { motion } from "framer-motion";
 import { ModalProps } from "../../../types/ui.types";
 import styles from "./modal.module.scss";
 
-const Modal: FC<ModalProps> = forwardRef(({ children, onModalClose }, ref) => {
-    const dialogRef = useRef<HTMLDialogElement>(null);
-    const modalRoot = document.getElementById('modalRoot');
+function createWrapper(wrapperId: string) {
+    const wrapperElement = document.createElement('div');
+    wrapperElement.setAttribute("id", wrapperId);
+    document.body.appendChild(wrapperElement);
+    return wrapperElement;
+}
 
-    const handleDialogClose = () => {
-        if (dialogRef.current) {
-            dialogRef.current.close();
+const Modal: FC<ModalProps> = ({ children, wrapperId = 'modalRoot', onModalClose }) => {
+    const [wrapperElement, setWrapperElement] = useState<HTMLElement | null>(null);
+
+    useLayoutEffect(() => {
+        let element = document.getElementById(wrapperId);
+        let systemCreated = false;
+
+        if (!element) {
+            systemCreated = true;
+            element = createWrapper(wrapperId);
         }
-    };
-
-    useImperativeHandle(ref, () => ({
-        closeModal: handleDialogClose,
-        openModal: () => {
-            if (dialogRef.current) {
-                dialogRef.current.showModal();
+        setWrapperElement(element);
+    
+        return () => {
+            if (systemCreated && element.parentNode) {
+                element.parentNode.removeChild(element);
             }
         }
-    }));
+    }, [wrapperId]);
 
-    if (!modalRoot) return null;
+    const handleModalClose = () => {
+        onModalClose && onModalClose();
+    };
+
+    if (!wrapperElement) return null;
 
     return createPortal(
-        <dialog className={styles.modal} ref={dialogRef} onClose={onModalClose}>
-            <div className={styles.modal__header}>
-                <form method="dialog">
-                    <span className={styles.modal__closeButton} onClick={handleDialogClose}>
-                        <RiCloseLargeLine />
-                    </span>
-                </form>
-            </div>
-            <div className={styles.modal__content}>
-                {children}
-            </div>
-        </dialog>
-    , modalRoot);
-});
+        <>
+            <div className={styles.modal__overlay} onClick={handleModalClose} />
+            <motion.dialog
+                className={styles.modal}
+                onClose={handleModalClose}
+                key={Math.random()}
+                initial={{ opacity: 0, y: 80, x: 80, scale: 0.8 }}
+                animate={{ opacity: 1, y: 0, x: 0, scale: 1 }}
+                exit={{ opacity: 0, y: 80, x: 80, scale: 0.8 }}
+                transition={{ duration: 0.3 }}
+                open
+            >
+                <div className={styles.modal__content}>
+                    <div className={styles.modal__header}>
+                        <form method="dialog">
+                            <span
+                                className={styles.modal__closeButton}
+                                onClick={handleModalClose}
+                            >
+                                <RiCloseLargeLine />
+                            </span>
+                        </form>
+                    </div>
+                    <div>{children}</div>
+                </div>
+            </motion.dialog>
+        </>,
+    wrapperElement
+    );
+};
 
 export default Modal;

@@ -2,7 +2,7 @@ import { FC, useState, useEffect, useCallback } from "react";
 import { GameCard, EndGame } from "../../components";
 import { createDeck } from "../../helpers/createDeck";
 import { DeckItem, GameBoardProps, GameHistoryItem } from '../../types';
-import { ROUND_TIME, END_GAME_TIMEOUT, COMPUTER_NAME } from "../../config/game";
+import { ROUND_TIME, COMPUTER_NAME } from "../../config/game";
 import styles from "./gameBoard.module.scss";
 
 const GameBoard: FC<GameBoardProps> = ({ gameConfig }) => {
@@ -77,9 +77,7 @@ const GameBoard: FC<GameBoardProps> = ({ gameConfig }) => {
 
     useEffect(() => {
         if (endGame) {
-            setTimeout(() => {
-                setShowEndGame(true);
-            }, END_GAME_TIMEOUT);
+            setShowEndGame(true);
         }
 
         if (openPairs.length === 2) {
@@ -115,15 +113,17 @@ const GameBoard: FC<GameBoardProps> = ({ gameConfig }) => {
 
     return (
         <> 
-            <EndGame
-                isOpen={showEndGame}
-                name={userName}
-                onModalClose={onModalClose}
-                restartGame={onGameRestart}
-                gameHistory={gameHistory}
-                isMultiplayer={isMultiplayer}
-                deckType={deckType}
-            />
+            {showEndGame ? (
+                <EndGame
+                    isOpen={showEndGame}
+                    name={userName}
+                    onModalClose={onModalClose}
+                    restartGame={onGameRestart}
+                    gameHistory={gameHistory}
+                    isMultiplayer={isMultiplayer}
+                    deckType={deckType}
+                />
+            ) : null}
             <div className={styles.root}>
                 {!isMultiplayer ? (
                     <h2 className={styles.root__title}>Hello {userName}! Moves: {moves}</h2>

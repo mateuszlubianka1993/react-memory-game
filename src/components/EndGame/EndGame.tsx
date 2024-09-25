@@ -1,10 +1,9 @@
-import { FC, useRef, useEffect, useState } from "react";
+import { FC, useState } from "react";
 import { Modal, Button } from "../../components";
-import { ModalProps, EndGameProps } from '../../types';
+import { EndGameProps } from '../../types';
 import styles from "./endGame.module.scss";
 
 const EndGame: FC<EndGameProps> = ({
-    isOpen,
     name,
     isMultiplayer,
     gameHistory,
@@ -12,26 +11,13 @@ const EndGame: FC<EndGameProps> = ({
     restartGame,
     onModalClose,
 }) => {
-    const modalRef = useRef<ModalProps>();
     const [saved, setSaved] = useState<boolean>(false);
     const moves = !isMultiplayer && gameHistory.length;
     const yourPairs = gameHistory.filter(item => (item.user === name) && item.foundPair).length;
     const oponentPairs = gameHistory.filter(item => (item.user !== name) && item.foundPair).length;
     let title = `Congratulations ${name}!`;
-
-    const openModal = () => {
-        if (!modalRef?.current?.openModal) return;
-
-        modalRef?.current?.openModal();
-    };
-    const closeModal = () => {
-        if (!modalRef?.current?.closeModal) return;
-
-        modalRef?.current?.closeModal();
-    };
     const handleRestartGame = () => {
         restartGame();
-        closeModal();
     };
 
     const handleSaveResult = () => {
@@ -47,18 +33,12 @@ const EndGame: FC<EndGameProps> = ({
         setSaved(true);
     };
 
-    useEffect(() => {
-        if (isOpen) {
-            openModal();
-        }
-    }, [isOpen]);
-
     if (isMultiplayer) {
         title = yourPairs > oponentPairs ? `You won ${name}!` : `You lost! ${name}`;
     }
 
     return (
-        <Modal ref={modalRef} onModalClose={onModalClose}>
+        <Modal onModalClose={onModalClose}>
             <div className={styles.root}>
                 {saved ? (
                     <>
