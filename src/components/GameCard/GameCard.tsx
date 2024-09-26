@@ -43,7 +43,7 @@ const GameCard: FC<GameCardProps> = ({
 
     return (
         <motion.div
-            className={`${styles.root} ${isFlipped ? 'flipped' : ''}`}
+            className={`${styles.root} ${isFlipped ? 'flipped' : ''} card-${card.id}`}
             onClick={() => handleClick(card.id)}
             variants={{
                 visible: { opacity: 1, rotateZ: 0 },
