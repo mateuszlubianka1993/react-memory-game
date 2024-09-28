@@ -1,5 +1,6 @@
 import { FC, useState, useEffect } from "react";
 import { GiBlackFlag } from "react-icons/gi";
+import { motion } from "framer-motion";
 import { GameCardProps, GameCardMode } from "../../types";
 import { GAME_CARD_MODES } from "../../config/game";
 import styles from "./gameCard.module.scss";
@@ -41,9 +42,14 @@ const GameCard: FC<GameCardProps> = ({
     };
 
     return (
-        <div
-            className={`${styles.root} ${isFlipped ? 'flipped' : ''}`}
+        <motion.div
+            className={`${styles.root} ${isFlipped ? 'flipped' : ''} card-${card.id}`}
             onClick={() => handleClick(card.id)}
+            variants={{
+                visible: { opacity: 1, rotateZ: 0 },
+                hidden: { opacity: 0, rotateZ: 180 }
+            }}
+            transition={{ duration: 1.5, type: 'spring', stiffness: 80 }}
         > 
             <div className={`${styles.root__inner} ${isFlipped ? styles.root__inner__flipped : ''}`}>
                 <div className={styles.root__front}>
@@ -63,7 +69,7 @@ const GameCard: FC<GameCardProps> = ({
                     <p className={styles.root__back__title}>{card.name}</p>
                 </div>
             </div>
-        </div>
+        </motion.div>
     );
 };
 
