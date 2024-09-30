@@ -57,6 +57,7 @@ const Modal: FC<ModalProps> = ({ children, wrapperId = 'modalRoot', onModalClose
                             <span
                                 className={styles.modal__closeButton}
                                 onClick={handleModalClose}
+                                role="button"
                             >
                                 <RiCloseLargeLine />
                             </span>

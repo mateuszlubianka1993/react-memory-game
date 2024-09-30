@@ -6,7 +6,7 @@ type ASCENDING = string;
 type DESCENDING = string;
 
 export interface InputProps {
-    label: string;
+    label?: string;
     value?: string;
     placeholder?: string;
     error?: boolean;
