@@ -13,14 +13,16 @@ const Input: FC<InputProps> = ({ label, value = '', placeholder, onChange, onBlu
         }
     };
 
-    const inputClassName = `${styles.root__input} ${error ? styles.error : ''}`;
+    const inputClassName = `${styles.root__input} ${error ? styles.error + ' error' : ''}`;
+    const inputId = `input-${label?.replace(/\s+/g, '-').toLowerCase()}`;
 
     return (
         <div className={styles.root}>
             {label ? (
-                <label className={styles.root__label}>{label}</label>
+                <label className={styles.root__label} htmlFor={inputId}>{label}</label>
             ) : null}
             <input
+                id={inputId}
                 className={inputClassName}
                 type="text"
                 value={value}
