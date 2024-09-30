@@ -6,7 +6,7 @@ import styles from "./modeItem.module.scss";
 
 
 const ModeItem: FC<ModeItemProps> = memo(({ modeName, active, onClick }) => {
-    const [card, setCard] = useState<DeckItem | null>(null);
+    const [card, setCard] = useState<DeckItem | undefined>();
 
     useEffect(() => {
         const card = getRandomCardByMode(modeName);

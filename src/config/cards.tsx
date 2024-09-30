@@ -19,7 +19,18 @@ import twitterImg from "../assets/images/logos/twitter.jpg";
 import whatsappImg from "../assets/images/logos/whatsapp.jpg";
 import discordImg from "../assets/images/logos/discord.jpg";
 
-export const CARD_DECKS = {
+type Card = {
+    pairId: string;
+    img: string;
+    name: string;
+};
+
+type CardDecks = {
+    FLAGS: Card[];
+    LOGOS: Card[];
+};
+
+export const CARD_DECKS: CardDecks = {
     FLAGS: [
         {
             pairId: 'br',
