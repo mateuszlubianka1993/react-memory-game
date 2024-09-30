@@ -5,7 +5,7 @@ import styles from "./homepage.module.scss";
 
 const HomePage: FC = () => {
   return (
-    <div className={styles.root}>
+    <div className={`${styles.root} homepage`}>
       <div className={styles.root__navBox}>
         <Navigation navItems={HOMEPAGE_ROUTES} />
       </div>
