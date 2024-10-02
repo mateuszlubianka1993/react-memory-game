@@ -8,8 +8,10 @@ export function createDeck(deckMode: string): DeckItem[] {
     return randomArray;
 }
 
-export function getRandomCardByMode(deckMode: GameCardMode): DeckItem {
+export function getRandomCardByMode(deckMode: GameCardMode): DeckItem | undefined {
     const foundArray = CARD_DECKS[deckMode as keyof typeof CARD_DECKS];
+    if (!foundArray) return;
+
     const randomIndex = Math.floor(Math.random() * foundArray.length);
 
     return foundArray[randomIndex];
