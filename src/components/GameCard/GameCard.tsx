@@ -50,6 +50,7 @@ const GameCard: FC<GameCardProps> = ({
                 hidden: { opacity: 0, rotateZ: 180 }
             }}
             transition={{ duration: 1.5, type: 'spring', stiffness: 80 }}
+            role="card"
         > 
             <div className={`${styles.root__inner} ${isFlipped ? styles.root__inner__flipped : ''}`}>
                 <div className={styles.root__front}>
