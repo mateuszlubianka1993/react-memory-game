@@ -1,7 +1,7 @@
 import { FC } from "react";
 import { Link } from "react-router-dom";
 import { INavigationItem } from "../../types";
-import styles from "./NavigationItem.module.scss";
+import styles from "./navigationItem.module.scss";
 
 const NavigationItem: FC<INavigationItem> = ({ path, text }) => {
   return (
