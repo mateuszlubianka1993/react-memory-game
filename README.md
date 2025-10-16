@@ -1,5 +1,5 @@
 <p align="center">
-  <img src="screens/banner.png" alt="React Memory Game Banner" width="600" style="border-radius:12px; margin-top:20px;" />
+  <img src="screens/banner.png" alt="React Memory Game Banner" style="max-width:600px; width:90%; border-radius:12px; margin-top:20px;" />
 </p>
 
 <h1 align="center">🎮 React Memory Game</h1>
@@ -20,8 +20,7 @@
 ---
 
 ## 🚀 Live Demo
-
-
+🔗 **[Open App Here](https://x-react-memory-game.netlify.app/)**
 
 ---
 
