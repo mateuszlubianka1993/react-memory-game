@@ -1,7 +1,7 @@
 import { FC } from "react";
 import { useNavigate } from "react-router-dom";
 import { Header, Button } from "../../components";
-import styles from "./ErrorPage.module.scss";
+import styles from "./errorPage.module.scss";
 
 const ErrorPage: FC = () => {
     const navigate = useNavigate();
